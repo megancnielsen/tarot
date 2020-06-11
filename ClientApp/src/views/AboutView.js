@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AboutView = props => {
+const AboutView = () => {
     return (
         <container>
             <div>
