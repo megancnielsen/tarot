@@ -8,6 +8,7 @@ export class Layout extends Component {
   render () {
     return (
       <div>
+        <img className="w-100" src="https://placeimg.com/1000/50/nature" alt="" />
         <NavMenu />
         <Container>
           {this.props.children}
