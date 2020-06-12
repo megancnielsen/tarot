@@ -10,6 +10,6 @@ const AboutView = () => {
                 Once upon a time....
             </p>
         </container>
-    );
+    )
 }
 export default AboutView;
