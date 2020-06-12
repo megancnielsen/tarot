@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AdministratorView = props => {
+const AdminView = () => {
     return (
         <container>
             <div>
@@ -10,4 +10,4 @@ const AdministratorView = props => {
     )
 }
 
-export default AdministratorView;
+export default AdminView;
