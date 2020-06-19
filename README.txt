@@ -6,7 +6,7 @@ X
 - Tarot Page/View: An info page explaining what Tarot is (route: "/tarot")
 X
 - Calendar Page/View: A page with calendar for scheduling appointments (route: "/schedule")
-- FAQs Page/View: A page with answers to frequently asked questions (route: "/faq")
+- FAQs Page/View: A page with answers to frequently asked questions (route: "/FAQs")
 X
 - Shop Page/View: A page for shopping items available for sale (route: "/shop")
 - Admin Page/View: A page for the site owner to make edits and recieve notifcations (route: "/administratorlogin")

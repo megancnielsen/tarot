@@ -23,7 +23,7 @@ const App = () => {
       <Route path='/schedule' component={CalendarView} />
       <Route path='/FAQs' component={FAQView} />
       <Route path='/shop' component={ShopView} />
-      <Route path='/administratorlogin' component={AdminView} />
+      <Route path='/administratorcontrol' component={AdminView} />
     </Layout>
   );
 }

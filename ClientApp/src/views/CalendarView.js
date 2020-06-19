@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import '../text.css'
 import './CalenderView.css';
 
 // const calenderStyle = {
@@ -13,7 +13,12 @@ class CalendarView extends Component {
     date: new Date(),
   }
  
-  onChange = date => this.setState({ date })
+  onChange = date => {
+    this.setState({ date })
+    alert('This is the date ' + date);
+  } 
+  
+  
  
   render() {
     return (
