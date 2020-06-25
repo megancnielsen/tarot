@@ -10,6 +10,7 @@ import CalendarView from './views/CalendarView';
 import FAQView from './views/FAQView';
 import ShopView from './views/ShopView';
 import AdminView from './views/AdminView';
+import LoginView from './views/LoginView';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
       <Route path='/FAQs' component={FAQView} />
       <Route path='/shop' component={ShopView} />
       <Route path='/administratorcontrol' component={AdminView} />
+      <Route path='/login' component={LoginView} />
     </Layout>
   );
 }
