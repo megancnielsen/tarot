@@ -11,6 +11,7 @@ import FAQView from './views/FAQView';
 import ShopView from './views/ShopView';
 import AdminView from './views/AdminView';
 import LoginView from './views/LoginView';
+import ApptForm from './components/ApptForm';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
       <Route path='/shop' component={ShopView} />
       <Route path='/administratorcontrol' component={AdminView} />
       <Route path='/login' component={LoginView} />
+      <Route path='/new' component={ApptForm} />
     </Layout>
   );
 }

@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using cSharpTarot.Services;
+using cSharpTarot.Models;
+using Microsoft.Extensions.Options;
 
 namespace cSharpTarot
 {
@@ -20,12 +23,15 @@ namespace cSharpTarot
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-    
+            services.AddMvc().AddJsonOptions(ops => ops.UseMemberCasing()).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.Configure<TarotDbSettings>(Configuration.GetSection(nameof(TarotDbSettings)));
+            services.AddSingleton<ITarotDbSettings>(sp => sp.GetRequiredService<IOptions<TarotDbSettings>>().Value);
+            services.AddSingleton<TarotService>();
+            // Singleton makes it so there is only one instance of this thing.
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/build";
+                configuration.RootPath = "clientapp/build";
             });
         }
 
@@ -55,7 +61,7 @@ namespace cSharpTarot
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp";
+                spa.Options.SourcePath = "clientapp";
 
                 if (env.IsDevelopment())
                 {

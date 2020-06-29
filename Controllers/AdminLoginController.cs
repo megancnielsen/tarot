@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace cSharpTarot.Controllers {
     [Route("api/[controller]")]
-    public class AdminLoginController : Controller {
+    public class AdminLoginController : Controller 
+    {
         public string Username = "Admin";
         public string Password = "Password";
 
