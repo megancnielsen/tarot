@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using cSharpTarot.Models;
@@ -8,27 +7,29 @@ using cSharpTarot.Services;
 
 namespace cSharpTarot.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class AppointmentController : ControllerBase
     {
-        private TarotService DbContext;
+        private TarotService _appointmentService;
 
-        public AppointmentController(TarotService service)
+        public AppointmentController(TarotService appointmentService)
         {
-            DbContext = service;
+            _appointmentService = appointmentService;
         }
 
         [HttpGet]
-        public ActionResult<List<Appointment>> Get() => DbContext.Get();
-        [HttpPost]
-        public ActionResult<Appointment> Create(dynamic Appt)
+        public ActionResult<List<Appointment>> Get() => _appointmentService.Get();
+        
+        [HttpPost("[action]")]
+        public IActionResult Create([FromBody]Appointment appt)
         {
+            System.Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(ModelState));
             System.Console.WriteLine("****************************************************************************************************");
-            System.Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(Appt));
+            System.Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(appt));
             System.Console.WriteLine("****************************************************************************************************");
-            DbContext.Create(Appt);
-            return Appt;
+            _appointmentService.Create(appt);
+            return Ok(appt);
         }
     }
 }

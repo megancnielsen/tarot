@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +23,8 @@ namespace cSharpTarot
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddJsonOptions(ops => ops.UseMemberCasing()).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddRazorPages().AddNewtonsoftJson();
             services.Configure<TarotDbSettings>(Configuration.GetSection(nameof(TarotDbSettings)));
             services.AddSingleton<ITarotDbSettings>(sp => sp.GetRequiredService<IOptions<TarotDbSettings>>().Value);
             services.AddSingleton<TarotService>();
@@ -36,7 +37,7 @@ namespace cSharpTarot
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -52,11 +53,9 @@ namespace cSharpTarot
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapRazorPages();
             });
 
             app.UseSpa(spa =>

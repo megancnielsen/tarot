@@ -7,22 +7,22 @@ namespace cSharpTarot.Services
 {
     public class TarotService
     {
-        private readonly IMongoCollection<Appointment> Appointments;
+        private readonly IMongoCollection<Appointment> _appointments;
         public TarotService(ITarotDbSettings settings)
         {
-            MongoClient Client = new MongoClient(settings.ConnectionString);
-            IMongoDatabase Database = Client.GetDatabase(settings.DatabaseName);
-            Appointments = Database.GetCollection<Appointment>(settings.TarotCollectionName);
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+            _appointments = database.GetCollection<Appointment>(settings.TarotCollectionName);
         }
-        public List<Appointment> Get() => Appointments.Find(apt => true).ToList();
-        public Appointment Get(string Id) => Appointments.Find<Appointment>(apt => apt.Id == Id).FirstOrDefault();
-        public Appointment Create(Appointment Appointment)
+        public List<Appointment> Get() => _appointments.Find(apt => true).ToList();
+        public Appointment Get(string Id) => _appointments.Find<Appointment>(apt => apt.Id == Id).FirstOrDefault();
+        public Appointment Create(Appointment appointment)
         {
-            Appointments.InsertOne(Appointment);
-            return Appointment;
+            _appointments.InsertOne(appointment);
+            return appointment;
         }
-        public void Update(string Id, Appointment Appt) => Appointments.ReplaceOne(apt => apt.Id == Id, Appt);
-        public void Remove(Appointment Appt) => Appointments.DeleteOne(apt => apt.Id == Appt.Id);
-        public void Remove(string Id) => Appointments.DeleteOne(apt => apt.Id == Id);
+        public void Update(string Id, Appointment Appt) => _appointments.ReplaceOne(apt => apt.Id == Id, Appt);
+        public void Remove(Appointment Appt) => _appointments.DeleteOne(apt => apt.Id == Appt.Id);
+        public void Remove(string Id) => _appointments.DeleteOne(apt => apt.Id == Id);
     }
 }

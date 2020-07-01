@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Axios from "axios";
 const INITIALFORM = {
-    Time: Date.now(),
+    Time: new Date(Date.now()),
     Email: "",
     Name: "",
     PhoneNumber: "",
@@ -15,7 +15,7 @@ const ApptForm = () => {
       setForm({...form, [e.target.id]:e.target.value});
   }
   const handleSubmit = () => {
-      Axios.post("/api/appointment", {...form}).then(result => {
+      Axios.post("/api/appointment/create", {...form }).then(result => {
           console.log(result.data);
           setForm(INITIALFORM);
       }).catch(err => console.log("Blah", err))
